@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Properties;
 
 public class Dao {
@@ -21,6 +22,7 @@ public class Dao {
     private Properties p;
     private String url;
     private Connection connection;
+    private Statement stmt;
 
     private Dao(){
         this.ConnessioneDb();
@@ -48,10 +50,10 @@ public class Dao {
             Class.forName(this.driverName);
             System.out.println("Connessione al database selezionato ...");
             this.connection = DriverManager.getConnection(this.url, this.username, this.password);
-        } catch (SQLException var2) {
-            var2.printStackTrace();
-        } catch (ClassNotFoundException var3) {
-            var3.printStackTrace();
+        } catch (SQLException se) {
+            se.printStackTrace();
+        } catch (ClassNotFoundException cnfe) {
+            cnfe.printStackTrace();
         }catch (FileNotFoundException fnfe) {
             fnfe.printStackTrace();
         }catch (IOException ie) {
@@ -62,4 +64,18 @@ public class Dao {
     public Connection getConnection(){
         return this.connection;
     }
+
+    public void creaTabella(String sql)
+    {
+        try
+        {
+            this.stmt.executeUpdate(sql);
+            System.out.println("Accesso alla tabella!");
+        }catch(SQLException se)
+        {
+            se.printStackTrace();
+        }
+    }
+
+
 }
