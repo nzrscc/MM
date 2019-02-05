@@ -65,7 +65,7 @@ public class Dao {
         return this.connection;
     }
 
-    public void creaTabella(String sql)
+    public void creaTabella(String sql) //da fare mentre si stabilisce la connessione
     {
         try
         {
